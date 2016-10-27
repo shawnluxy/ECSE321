@@ -1,9 +1,10 @@
 <?php
 
 $app->get('/food', function($request) {
-	$dao = new Dao();
-	echo $dao->showAll('food', 'NAME');
+	$dao = new Dao("Food");
+	echo $dao->showAll();
 });
+
 
 
 ?>
