@@ -13,13 +13,4 @@ require_once '../api/Order_api.php';
 require_once '../api/Schedule_api.php';
 require_once '../api/Staff_api.php';
 
-
-
-// $app->get('/hello/{name}', function ($request, $response) {
-//     $name = $request->getAttribute('name');
-//     $response->getBody()->write("Hello, $name");
-//     return $response;
-// });
-
-
 $app->run();

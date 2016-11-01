@@ -23,7 +23,7 @@ class Dao {
 		$conn = $db->setup();
 		$sql = $this->auth->sql_show();
 		$result = $conn->query($sql);
-		return $db->showjson($result);
+		return $this->showjson($result);
 	}
 
 	public function findby($table, $selector, $column, $s) {
@@ -32,15 +32,21 @@ class Dao {
 		$s = Validation::validate($s, $conn);
 		$sql = "select $selector from $table where $column = '$s'";
 		$result = $conn->query($sql);
-		return $db->showjson($result);
+		return $this->showjson($result);
 	}
 
 	public function addData($s) {
-		return $this->auth->add($s);
+		$db = new DBconnect();
+		$conn = $db->setup();
+
+		return $this->auth->add($conn, $s);
 	}
 
 	public function updateData($s) {
-		return $this->auth->update($s);
+		$db = new DBconnect();
+		$conn = $db->setup();
+
+		return $this->auth->update($conn, $s);
 	}
 
 	public function deleteby($s) {
@@ -51,15 +57,28 @@ class Dao {
 		$p = Validation::validate($s, $conn);
 		$result = $sql->execute();
 		if($result) {
-			return "success";
+			$response = "success";
 		}else {
-			return "error";
+			$response = "406: ". $sql->error;
 		}
 		$sql->close();
+		return $response;
 	}
 
 	public function getAuth($header) {
 		return $this->auth->authCheck($header);
+	}
+
+	public function showjson($result) {
+		if($result->num_rows > 0) {
+			while($row = $result->fetch_assoc()) {
+				$data[] = $row;
+			}
+			header('Content-Type: application/json');
+			return json_encode($data);
+		}else {
+			return "empty";
+		}
 	}
 
 }

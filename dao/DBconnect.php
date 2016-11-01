@@ -17,18 +17,6 @@ class DBconnect {
 		return $conn;
 	}
 
-	public function showjson($result) {
-		if($result->num_rows > 0) {
-			while($row = $result->fetch_assoc()) {
-				$data[] = $row;
-			}
-			header('Content-Type: application/json');
-			return json_encode($data);
-		}else {
-			return "empty";
-		}
-	}
-
 }
 
 ?>
