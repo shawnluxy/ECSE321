@@ -6,6 +6,8 @@ require '../vendor/autoload.php';
 require '../dao/Dao.php';
 
 $app = new \Slim\App;
+$app->add(new \CorsSlim\CorsSlim());
+
 require_once '../api/Food_api.php';
 require_once '../api/Equipment_api.php';
 require_once '../api/Menu_api.php';

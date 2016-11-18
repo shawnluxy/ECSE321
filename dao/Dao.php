@@ -5,23 +5,25 @@ require_once 'DataAccess.php';
 
 class Dao {
 
-	private $auth;
+	private $dao;
 	public function __construct($obj){
 		switch ($obj) {
-			case "Equipment": $this->auth = new Equipment_dao(); break;
-            case "Food": $this->auth = new Food_dao(); break;
-            case "Menu": $this->auth = new Menu_dao(); break;
-            case "Order": $this->auth = new Order_dao(); break;
-            case "Schedule": $this->auth = new Schedule_dao(); break;
-            case "Staff": $this->auth = new Staff_dao(); break;
-            default: $this->auth = new Default_dao();
+			case "Equipment": $this->dao = new Equipment_dao(); break;
+            case "Food": $this->dao = new Food_dao(); break;
+            case "Menu": $this->dao = new Menu_dao(); break;
+            case "Order": $this->dao = new Order_dao(); break;
+            case "Schedule": $this->dao = new Schedule_dao(); break;
+            case "Staff": $this->dao = new Staff_dao(); break;
+            case "Recipe": $this->dao = new Recipe_dao(); break;
+            case "Orderlist": $this->dao = new Orderlist_dao(); break;
+            default: $this->dao = new Default_dao();
         }
 	}
 
 	public function showAll() {
 		$db = new DBconnect();
 		$conn = $db->setup();
-		$sql = $this->auth->sql_show();
+		$sql = $this->dao->sql_show();
 		$result = $conn->query($sql);
 		return $this->showjson($result);
 	}
@@ -39,20 +41,20 @@ class Dao {
 		$db = new DBconnect();
 		$conn = $db->setup();
 
-		return $this->auth->add($conn, $s);
+		return $this->dao->add($conn, $s);
 	}
 
 	public function updateData($s) {
 		$db = new DBconnect();
 		$conn = $db->setup();
 
-		return $this->auth->update($conn, $s);
+		return $this->dao->update($conn, $s);
 	}
 
 	public function deleteby($s) {
 		$db = new DBconnect();
 		$conn = $db->setup();
-		$sql = $conn->prepare($this->auth->sql_delete());
+		$sql = $conn->prepare($this->dao->sql_delete());
 		$sql->bind_param("s",$p);
 		$p = Validation::validate($s, $conn);
 		$result = $sql->execute();
@@ -66,7 +68,7 @@ class Dao {
 	}
 
 	public function getAuth($header) {
-		return $this->auth->authCheck($header);
+		return $this->dao->authCheck($header);
 	}
 
 	public function showjson($result) {

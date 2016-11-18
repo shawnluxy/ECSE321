@@ -1,6 +1,5 @@
 <?php 
 
-
 interface DataAccess {
 	public function sql_show();
 	public function sql_delete();
@@ -47,6 +46,10 @@ class Equipment_dao implements DataAccess {
 		return $response;	
 	}
 	public function authCheck($header) {
+		$role = $header[0];
+		$permission = array("Manager", "Wholesaler");
+		if(in_array($role, $permission)) {
+			return 1;}
 		return 0;
 	}
 }
@@ -88,7 +91,11 @@ class Food_dao implements DataAccess {
 		return $response;
 	}
 	public function authCheck($header) {
-		return 1;
+		$role = $header[0];
+		$permission = array("Manager", "Wholesaler");
+		if(in_array($role, $permission)) {
+			return 1;}
+		return 0;
 	}
 }
 
@@ -130,7 +137,11 @@ class Menu_dao implements DataAccess {
 		return $response;
 	}
 	public function authCheck($header) {
-		return 1;
+		$role = $header[0];
+		$permission = array("Manager", "Cook");
+		if(in_array($role, $permission)) {
+			return 1;}
+		return 0;
 	}
 }
 
@@ -170,7 +181,11 @@ class Order_dao implements DataAccess {
 		return $response;
 	}
 	public function authCheck($header) {
-		return 4;
+		$role = $header[0];
+		$permission = array("Manager", "Cashier");
+		if(in_array($role, $permission)) {
+			return 1;}
+		return 0;
 	}
 }
 
@@ -180,13 +195,43 @@ class Schedule_dao implements DataAccess {
 	public function sql_delete() {
 		return "delete from schedule where ID = ?";}
 	public function add($conn, $s) {
-
+		$sql = $conn->prepare("insert into schedule (ID, UID, START_TIME, END_TIME) values (?, ?, ?, ?)");
+		$sql->bind_param("ssss", $id, $uid, $start_time, $end_time);
+		$id = $s["ID"];
+		$uid = $s["UID"];
+		$start_time = $s["START_TIME"];
+		$end_time = $s["END_TIME"];
+		$result = $sql->execute();
+		if($result){
+			$response = "SUCCESS";
+		}else {
+			$response = "406: ". $sql->error;
+		}
+		$sql->close();
+		return $response;
 	}
 	public function update($conn, $s) {
-
+		$id = $s["ID"];
+		$sql = $conn->prepare("update schedule set UID = ?, START_TIME = ?, END_TIME = ? where ID = '$id'");
+		$sql->bind_param("sss", $uid, $start_time, $end_time);
+		$uid = $s["UID"];
+		$start_time = $s["START_TIME"];
+		$end_time = $s["END_TIME"];
+		$result = $sql->execute();
+		if($result){
+			$response = "SUCCESS";
+		}else {
+			$response = "406: ". $sql->error;
+		}
+		$sql->close();
+		return $response;
 	}
 	public function authCheck($header) {
-		return 5;
+		$role = $header[0];
+		$permission = array("Manager");
+		if(in_array($role, $permission)) {
+			return 1;}
+		return 0;
 	}
 }
 
@@ -197,13 +242,143 @@ class Staff_dao implements DataAccess {
 	public function sql_delete() {
 		return "delete from staff where ID = ?";}
 	public function add($conn, $s) {
-
+		$sql = $conn->prepare("insert into staff (ID, NAME, ROLE, GENDER, AGE, TEL, USERNAME, PASSWORD) values (?, ?, ?, ?, ?, ?, ?, ?)");
+		$sql->bind_param("ssssiiss", $id, $name, $role, $gender, $age, $tel, $username, $password);
+		$id = $s["ID"];
+		$name = $s["NAME"];
+		$role = $s["ROLE"];
+		$gender = $s["GENDER"];
+		$age = $s["AGE"];
+		$tel = $s["TEL"];
+		$username = $s["USERNAME"];
+		$password = $s["PASSWORD"];
+		$result = $sql->execute();
+		if($result){
+			$response = "SUCCESS";
+		}else {
+			$response = "406: ". $sql->error;
+		}
+		$sql->close();
+		return $response;
 	}
 	public function update($conn, $s) {
-
+		$id = $s["ID"];
+		$sql = $conn->prepare("update staff set NAME = ?, ROLE = ?, GENDER = ?, AGE = ?, TEL = ?, USERNAME = ?, PASSWORD = ? where ID = '$id'");
+		$sql->bind_param("sssiiss", $name, $role, $gender, $age, $tel, $username, $password);
+		$name = $s["NAME"];
+		$role = $s["ROLE"];
+		$gender = $s["GENDER"];
+		$age = $s["AGE"];
+		$tel = $s["TEL"];
+		$username = $s["USERNAME"];
+		$password = $s["PASSWORD"];
+		$result = $sql->execute();
+		if($result){
+			$response = "SUCCESS";
+		}else {
+			$response = "406: ". $sql->error;
+		}
+		$sql->close();
+		return $response;
 	}
 	public function authCheck($header) {
-		return 6;
+		$role = $header[0];
+		$permission = array("Manager");
+		if(in_array($role, $permission)) {
+			return 1;}
+		return 0;
+	}
+}
+
+class Recipe_dao implements DataAccess {
+	public function sql_show() {
+		return "select * from recipe order by ID ASC";}
+	public function sql_delete() {
+		return "delete from recipe where ID = ?";}
+	public function add($conn, $s) {
+		$sql = $conn->prepare("insert into recipe (MID, FOOD_NAME, AMOUNT) values (?, ?, ?)");
+		$sql->bind_param("ssi", $mid, $food_name, $amount);
+		$mid = $s["MID"];
+		$food_name = $s["FOOD_NAME"];
+		$amount = $s["AMOUNT"];
+		$result = $sql->execute();
+		if($result){
+			$response = "SUCCESS";
+		}else {
+			$response = "406: ". $sql->error;
+		}
+		$sql->close();
+		return $response;
+	}
+	public function update($conn, $s) {
+		$id = $s["ID"];
+		$sql = $conn->prepare("update recipe set MID = ?, FOOD_NAME = ?, AMOUNT = ? where ID = '$id'");
+		$sql->bind_param("ssi", $mid, $food_name, $amount);
+		$mid = $s["MID"];
+		$food_name = $s["FOOD_NAME"];
+		$amount = $s["AMOUNT"];
+		$result = $sql->execute();
+		if($result){
+			$response = "SUCCESS";
+		}else {
+			$response = "406: ". $sql->error;
+		}
+		$sql->close();
+		return $response;
+	}
+	public function authCheck($header) {
+		$role = $header[0];
+		$permission = array("Manager", "Cook");
+		if(in_array($role, $permission)) {
+			return 1;}
+		return 0;
+	}
+}
+
+class Orderlist_dao implements DataAccess {
+	public function sql_show() {
+		return "select * from orderlist order by OID ASC";}
+	public function sql_delete() {
+		return "delete from orderlist where ID = ?";}
+	public function add($conn, $s) {
+		$sql = $conn->prepare("insert into orderlist (OID, MID, MENU_NAME, AMOUNT) values (?, ?, ?, ?)");
+		$sql->bind_param("sssi", $oid, $mid, $menu_name, $amount);
+		$oid = $s["OID"];
+		$mid = $s["MID"];
+		$menu_name = $s["MENU_NAME"];
+		$amount = $s["AMOUNT"];
+		$result = $sql->execute();
+		if($result){
+			$response = "SUCCESS";
+		}else {
+			$response = "406: ". $sql->error;
+		}
+		$sql->close();
+		return $response;
+	}
+	public function update($conn, $s) {
+		$id = $s["ID"];
+		$sql = $conn->prepare("update orderlist set OID = ?, MID = ?, MENU_NAME = ?, AMOUNT = ? where ID = '$id'");
+		$sql->bind_param("si", $time, $status);
+		$oid = $s["OID"];
+		$mid = $s["MID"];
+		$menu_name = $s["MENU_NAME"];
+		$amount = $s["AMOUNT"];
+		$result = $sql->execute();
+		if($result){
+			$response = "SUCCESS";
+		}else {
+			$response = "406: ". $sql->error;
+		}
+		$sql->close();
+		return $response;
+	}
+	public function authCheck($header) {
+		$role = $header[0];
+		$permission = array("Manager", "Cashier");
+		if(in_array($role, $permission)) {
+			return 1;}
+		return 0;
 	}
 }
 
