@@ -5,6 +5,12 @@ $app->get('/staff', function($request) {
 	echo $dao->showAll();
 });
 
+$app->get('/staff/{id}', function($request) {
+	$id = $request->getAttribute('id');
+	$dao = new Dao("Staff");
+	echo $dao->findby('staff','ID,NAME,ROLE,GENDER,AGE,TEL','ID',$id);
+});
+
 $app->post('/add_staff', function($request) {
 	$dao = new Dao("Staff");
 	$header = $request->getHeader('Authorization');
@@ -25,22 +31,22 @@ $app->put('/update_staff', function($request) {
 	$data = $request->getParsedBody();
 	$exist = $dao->findby('staff','*','ID',$id);
 	if($exist == "empty"){
-		return "404: Not Found";
+		return "404: Item Not Found";
 	}else {
 		return $dao->updateData($data);
 	}
 });
 
-$app->delete('/delete_staff', function($request) {
+$app->delete('/delete_staff/{id}', function($request) {
 	$dao = new Dao("Staff");
 	$header = $request->getHeader('Authorization');
 	if($dao->getAuth($header) != 1){
 		return "403: No Permission";
 	}
-	$id = $request->getParsedBody()['ID'];
+	$id = $request->getAttribute('id');
 	$exist = $dao->findby('staff','*','ID',$id);
 	if($exist == "empty"){
-		return "404: Not Found";
+		return "404: Item Not Found";
 	}else {
 		return $dao->deleteby($id);
 	}

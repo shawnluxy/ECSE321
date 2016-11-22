@@ -41,37 +41,37 @@ $app->put('/update_order', function($request) {
 	$data = $request->getParsedBody();
 	$exist = $dao->findby('orders','*','ID',$id);
 	if($exist == "empty"){
-		return "404: Not Found";
+		return "404: Item Not Found";
 	}else {
 		return $dao->updateData($data);
 	}
 });
 
-$app->delete('/delete_order', function($request) {
+$app->delete('/delete_order/{id}', function($request) {
 	$dao = new Dao("Order");
 	$header = $request->getHeader('Authorization');
 	if($dao->getAuth($header) != 1){
 		return "403: No Permission";
 	}
-	$id = $request->getParsedBody()['ID'];
+	$id = $request->getAttribute('id');
 	$exist = $dao->findby('orders','*','ID',$id);
 	if($exist == "empty"){
-		return "404: Not Found";
+		return "404: Item Not Found";
 	}else {
 		return $dao->deleteby($id);
 	}
 });
 
-$app->delete('/delete_orderlist', function($request) {
+$app->delete('/delete_orderlist/{id}', function($request) {
 	$dao = new Dao("Orderlist");
 	$header = $request->getHeader('Authorization');
 	if($dao->getAuth($header) != 1){
 		return "403: No Permission";
 	}
-	$id = $request->getParsedBody()['ID'];
+	$id = $request->getAttribute('id');
 	$exist = $dao->findby('orderlist','*','ID',$id);
 	if($exist == "empty"){
-		return "404: Not Found";
+		return "404: Item Not Found";
 	}else {
 		return $dao->deleteby($id);
 	}

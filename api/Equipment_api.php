@@ -25,22 +25,22 @@ $app->put('/update_equipment', function($request) {
 	$data = $request->getParsedBody();
 	$exist = $dao->findby('equipment','*','NAME',$rname);
 	if($exist == "empty"){
-		return "404: Not Found";
+		return "404: Item Not Found";
 	}else {
 		return $dao->updateData($data);
 	}
 });
 
-$app->delete('/delete_equipment', function($request) {
+$app->delete('/delete_equipment/{name}', function($request) {
 	$dao = new Dao("Equipment");
 	$header = $request->getHeader('Authorization');
 	if($dao->getAuth($header) != 1){
 		return "403: No Permission";
 	}
-	$name = $request->getParsedBody()['NAME'];
+	$name = $request->getAttribute('name');
 	$exist = $dao->findby('equipment','*','NAME',$name);
 	if($exist == "empty"){
-		return "404: Not Found";
+		return "404: Item Not Found";
 	}else {
 		return $dao->deleteby($name);
 	}
