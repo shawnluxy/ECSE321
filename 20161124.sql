@@ -87,7 +87,7 @@ CREATE TABLE `menu` (
 
 LOCK TABLES `menu` WRITE;
 /*!40000 ALTER TABLE `menu` DISABLE KEYS */;
-INSERT INTO `menu` VALUES ('253hhl92rhbi2d0vnco7pemj2nvxhdro','applepen',2,1),('jcxcsxd706yqiqfkgiwixezfcttjz2la','PPAP',5,1),('kqmzqeqie5a5a1zug2w2x966w6o7daov','pineapplepen',3,1);
+INSERT INTO `menu` VALUES ('253hhl92rhbi2d0vnco7pemj2nvxhdro','applepen',2,0),('jcxcsxd706yqiqfkgiwixezfcttjz2la','PPAP',5,1),('kqmzqeqie5a5a1zug2w2x966w6o7daov','pineapplepen',3,0);
 /*!40000 ALTER TABLE `menu` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -105,7 +105,7 @@ CREATE TABLE `orderlist` (
   `MENU_NAME` varchar(255) NOT NULL,
   `AMOUNT` int(11) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -114,7 +114,7 @@ CREATE TABLE `orderlist` (
 
 LOCK TABLES `orderlist` WRITE;
 /*!40000 ALTER TABLE `orderlist` DISABLE KEYS */;
-INSERT INTO `orderlist` VALUES (1,'v2tl46ds54taomnrci7uko0cd53rvxes','253hhl92rhbi2d0vnco7pemj2nvxhdro','applepen',2),(2,'bkr2hj770ee7ciak5g6namczjy73u3pe','kqmzqeqie5a5a1zug2w2x966w6o7daov','pineapplepen',1);
+INSERT INTO `orderlist` VALUES (1,'v2tl46ds54taomnrci7uko0cd53rvxes','253hhl92rhbi2d0vnco7pemj2nvxhdro','applepen',2),(2,'bkr2hj770ee7ciak5g6namczjy73u3pe','kqmzqeqie5a5a1zug2w2x966w6o7daov','pineapplepen',1),(3,'5pglgv0rwi33wlelfibwul4auv8zug2b','kqmzqeqie5a5a1zug2w2x966w6o7daov','pineapplepen',5),(4,'5pglgv0rwi33wlelfibwul4auv8zug2b','253hhl92rhbi2d0vnco7pemj2nvxhdro','applepen',5);
 /*!40000 ALTER TABLE `orderlist` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -139,7 +139,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES ('bkr2hj770ee7ciak5g6namczjy73u3pe','2016-10-10 11:20:00',0),('v2tl46ds54taomnrci7uko0cd53rvxes','2016-10-10 10:00:00',1);
+INSERT INTO `orders` VALUES ('5pglgv0rwi33wlelfibwul4auv8zug2b','2016-11-24 15:47:12',1),('bkr2hj770ee7ciak5g6namczjy73u3pe','2016-10-10 11:20:00',0),('v2tl46ds54taomnrci7uko0cd53rvxes','2016-10-10 10:00:00',1);
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -156,7 +156,7 @@ CREATE TABLE `recipe` (
   `FOOD_NAME` varchar(255) NOT NULL,
   `AMOUNT` int(11) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -165,7 +165,7 @@ CREATE TABLE `recipe` (
 
 LOCK TABLES `recipe` WRITE;
 /*!40000 ALTER TABLE `recipe` DISABLE KEYS */;
-INSERT INTO `recipe` VALUES (1,'253hhl92rhbi2d0vnco7pemj2nvxhdro','apple',1),(2,'253hhl92rhbi2d0vnco7pemj2nvxhdro','pen',1),(3,'kqmzqeqie5a5a1zug2w2x966w6o7daov','pineapple',1),(4,'kqmzqeqie5a5a1zug2w2x966w6o7daov','pen',1),(5,'jcxcsxd706yqiqfkgiwixezfcttjz2la','apple',1),(6,'jcxcsxd706yqiqfkgiwixezfcttjz2la','pineapple',1),(7,'jcxcsxd706yqiqfkgiwixezfcttjz2la','pen',2);
+INSERT INTO `recipe` VALUES (12,'253hhl92rhbi2d0vnco7pemj2nvxhdro','apple',1),(13,'253hhl92rhbi2d0vnco7pemj2nvxhdro','pen',1),(16,'jcxcsxd706yqiqfkgiwixezfcttjz2la','apple',1),(17,'jcxcsxd706yqiqfkgiwixezfcttjz2la','pineapple',1),(18,'jcxcsxd706yqiqfkgiwixezfcttjz2la','pen',2),(19,'kqmzqeqie5a5a1zug2w2x966w6o7daov','pineapple',1),(20,'kqmzqeqie5a5a1zug2w2x966w6o7daov','pen',1);
 /*!40000 ALTER TABLE `recipe` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -177,12 +177,12 @@ DROP TABLE IF EXISTS `schedule`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `schedule` (
-  `ID` varchar(32) NOT NULL,
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
   `UID` varchar(32) NOT NULL,
   `START_TIME` datetime NOT NULL,
   `END_TIME` datetime NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -191,7 +191,7 @@ CREATE TABLE `schedule` (
 
 LOCK TABLES `schedule` WRITE;
 /*!40000 ALTER TABLE `schedule` DISABLE KEYS */;
-INSERT INTO `schedule` VALUES ('mz37nkt4m2cw06m7lbquad3nj68cmu66','x22ykbi0mkkj5qqporji8pgyvwjepgqi','2016-10-10 10:30:00','2016-10-10 12:00:00');
+INSERT INTO `schedule` VALUES (1,'x22ykbi0mkkj5qqporji8pgyvwjepgqi','2016-11-24 10:00:00','2016-11-24 12:00:00'),(2,'x22ykbi0mkkj5qqporji8pgyvwjepgqi','2016-11-25 11:00:00','2016-11-25 13:00:00');
 /*!40000 ALTER TABLE `schedule` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -221,7 +221,7 @@ CREATE TABLE `staff` (
 
 LOCK TABLES `staff` WRITE;
 /*!40000 ALTER TABLE `staff` DISABLE KEYS */;
-INSERT INTO `staff` VALUES ('x22ykbi0mkkj5qqporji8pgyvwjepgqi','shawn','manager','male',21,1234567890,'admin','admin');
+INSERT INTO `staff` VALUES ('ncff72rk0j6o9fso2sc9bmpww4z29nvz','abc','Cook','female',20,987654321,'cook','cook'),('x22ykbi0mkkj5qqporji8pgyvwjepgqi','shawn','Manager','male',21,1234567890,'admin','admin');
 /*!40000 ALTER TABLE `staff` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -234,4 +234,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-11-08 13:57:36
+-- Dump completed on 2016-11-24 16:53:44

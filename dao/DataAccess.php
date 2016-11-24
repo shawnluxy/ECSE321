@@ -263,15 +263,13 @@ class Staff_dao implements DataAccess {
 	}
 	public function update($conn, $s) {
 		$id = $s["ID"];
-		$sql = $conn->prepare("update staff set NAME = ?, ROLE = ?, GENDER = ?, AGE = ?, TEL = ?, USERNAME = ?, PASSWORD = ? where ID = '$id'");
-		$sql->bind_param("sssiiss", $name, $role, $gender, $age, $tel, $username, $password);
+		$sql = $conn->prepare("update staff set NAME = ?, ROLE = ?, GENDER = ?, AGE = ?, TEL = ? where ID = '$id'");
+		$sql->bind_param("sssii", $name, $role, $gender, $age, $tel);
 		$name = $s["NAME"];
 		$role = $s["ROLE"];
 		$gender = $s["GENDER"];
 		$age = $s["AGE"];
 		$tel = $s["TEL"];
-		$username = $s["USERNAME"];
-		$password = $s["PASSWORD"];
 		$result = $sql->execute();
 		if($result){
 			$response = "SUCCESS";

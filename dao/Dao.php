@@ -59,7 +59,7 @@ class Dao {
 		$p = Validation::validate($s, $conn);
 		$result = $sql->execute();
 		if($result) {
-			$response = "success";
+			$response = "SUCCESS";
 		}else {
 			$response = "406: ". $sql->error;
 		}
