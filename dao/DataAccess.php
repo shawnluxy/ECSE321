@@ -101,7 +101,7 @@ class Food_dao implements DataAccess {
 
 class Menu_dao implements DataAccess {
 	public function sql_show() {
-		return "select * from menu order by NAME ASC";}
+		return "select * from menu order by POPULARITY DESC";}
 	public function sql_delete() {
 		return "delete from menu where ID = ?";}
 	public function add($conn, $s) {

@@ -61,7 +61,7 @@ CREATE TABLE `food` (
 
 LOCK TABLES `food` WRITE;
 /*!40000 ALTER TABLE `food` DISABLE KEYS */;
-INSERT INTO `food` VALUES ('apple',10,1),('pen',20,1),('pineapple',10,2);
+INSERT INTO `food` VALUES ('apple',1,5),('bacon',100,2),('broccoli',44,2),('Caesar dressing',10,5.5),('carrot',100,1),('chicken',10,3.3),('fish',1,1),('lettuce',200,2),('Mixed greens',100,2),('Parmesan cheese',100,1.5),('pen',1,3),('pork collar',1,10),('red onion',100,1.3),('salmon',1,10),('shrimp',1,3);
 /*!40000 ALTER TABLE `food` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -87,7 +87,7 @@ CREATE TABLE `menu` (
 
 LOCK TABLES `menu` WRITE;
 /*!40000 ALTER TABLE `menu` DISABLE KEYS */;
-INSERT INTO `menu` VALUES ('253hhl92rhbi2d0vnco7pemj2nvxhdro','applepen',2,0),('jcxcsxd706yqiqfkgiwixezfcttjz2la','PPAP',5,1),('kqmzqeqie5a5a1zug2w2x966w6o7daov','pineapplepen',3,0);
+INSERT INTO `menu` VALUES ('oe6v4qadnzbjr2sbg9sbrsxkcii5vfie','Caesar Salad',12.5,2),('q4kobjo4dyyd9edh2g8lp1bftc4ugowe','apple pen',10,0),('sz0tzfwdhobcykx4k7fvbxpcbf0ooeky','House Salad',10.5,3);
 /*!40000 ALTER TABLE `menu` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -105,7 +105,7 @@ CREATE TABLE `orderlist` (
   `MENU_NAME` varchar(255) NOT NULL,
   `AMOUNT` int(11) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -114,7 +114,7 @@ CREATE TABLE `orderlist` (
 
 LOCK TABLES `orderlist` WRITE;
 /*!40000 ALTER TABLE `orderlist` DISABLE KEYS */;
-INSERT INTO `orderlist` VALUES (1,'v2tl46ds54taomnrci7uko0cd53rvxes','253hhl92rhbi2d0vnco7pemj2nvxhdro','applepen',2),(2,'bkr2hj770ee7ciak5g6namczjy73u3pe','kqmzqeqie5a5a1zug2w2x966w6o7daov','pineapplepen',1),(3,'5pglgv0rwi33wlelfibwul4auv8zug2b','kqmzqeqie5a5a1zug2w2x966w6o7daov','pineapplepen',5),(4,'5pglgv0rwi33wlelfibwul4auv8zug2b','253hhl92rhbi2d0vnco7pemj2nvxhdro','applepen',5);
+INSERT INTO `orderlist` VALUES (1,'v2tl46ds54taomnrci7uko0cd53rvxes','253hhl92rhbi2d0vnco7pemj2nvxhdro','applepen',2),(2,'bkr2hj770ee7ciak5g6namczjy73u3pe','kqmzqeqie5a5a1zug2w2x966w6o7daov','pineapplepen',1),(3,'5pglgv0rwi33wlelfibwul4auv8zug2b','kqmzqeqie5a5a1zug2w2x966w6o7daov','pineapplepen',5),(4,'5pglgv0rwi33wlelfibwul4auv8zug2b','253hhl92rhbi2d0vnco7pemj2nvxhdro','applepen',5),(5,'jvmwdp18ebfl2wsx1tbf97eavd0zcps9','oe6v4qadnzbjr2sbg9sbrsxkcii5vfie','Caesar Salad',2),(6,'jg07o29ej0d4tynrvaqvzop6r7j4mbb8','sz0tzfwdhobcykx4k7fvbxpcbf0ooeky','House Salad',3);
 /*!40000 ALTER TABLE `orderlist` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -139,7 +139,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES ('5pglgv0rwi33wlelfibwul4auv8zug2b','2016-11-24 15:47:12',1),('bkr2hj770ee7ciak5g6namczjy73u3pe','2016-10-10 11:20:00',0),('v2tl46ds54taomnrci7uko0cd53rvxes','2016-10-10 10:00:00',1);
+INSERT INTO `orders` VALUES ('jg07o29ej0d4tynrvaqvzop6r7j4mbb8','2016-11-28 01:57:00',1),('jvmwdp18ebfl2wsx1tbf97eavd0zcps9','2016-11-28 01:56:24',1);
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -156,7 +156,7 @@ CREATE TABLE `recipe` (
   `FOOD_NAME` varchar(255) NOT NULL,
   `AMOUNT` int(11) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -165,7 +165,7 @@ CREATE TABLE `recipe` (
 
 LOCK TABLES `recipe` WRITE;
 /*!40000 ALTER TABLE `recipe` DISABLE KEYS */;
-INSERT INTO `recipe` VALUES (12,'253hhl92rhbi2d0vnco7pemj2nvxhdro','apple',1),(13,'253hhl92rhbi2d0vnco7pemj2nvxhdro','pen',1),(16,'jcxcsxd706yqiqfkgiwixezfcttjz2la','apple',1),(17,'jcxcsxd706yqiqfkgiwixezfcttjz2la','pineapple',1),(18,'jcxcsxd706yqiqfkgiwixezfcttjz2la','pen',2),(19,'kqmzqeqie5a5a1zug2w2x966w6o7daov','pineapple',1),(20,'kqmzqeqie5a5a1zug2w2x966w6o7daov','pen',1);
+INSERT INTO `recipe` VALUES (23,'q4kobjo4dyyd9edh2g8lp1bftc4ugowe','apple',1),(24,'q4kobjo4dyyd9edh2g8lp1bftc4ugowe','pen',1),(25,'oe6v4qadnzbjr2sbg9sbrsxkcii5vfie','bacon',2),(26,'oe6v4qadnzbjr2sbg9sbrsxkcii5vfie','Caesar dressing',1),(27,'oe6v4qadnzbjr2sbg9sbrsxkcii5vfie','lettuce',2),(28,'oe6v4qadnzbjr2sbg9sbrsxkcii5vfie','Parmesan cheese',1),(29,'sz0tzfwdhobcykx4k7fvbxpcbf0ooeky','Mixed greens',2),(30,'sz0tzfwdhobcykx4k7fvbxpcbf0ooeky','red onion',1),(31,'sz0tzfwdhobcykx4k7fvbxpcbf0ooeky','tomato',1),(32,'sz0tzfwdhobcykx4k7fvbxpcbf0ooeky','carrot',1);
 /*!40000 ALTER TABLE `recipe` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -182,7 +182,7 @@ CREATE TABLE `schedule` (
   `START_TIME` datetime NOT NULL,
   `END_TIME` datetime NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -191,7 +191,7 @@ CREATE TABLE `schedule` (
 
 LOCK TABLES `schedule` WRITE;
 /*!40000 ALTER TABLE `schedule` DISABLE KEYS */;
-INSERT INTO `schedule` VALUES (1,'x22ykbi0mkkj5qqporji8pgyvwjepgqi','2016-11-24 10:00:00','2016-11-24 12:00:00'),(2,'x22ykbi0mkkj5qqporji8pgyvwjepgqi','2016-11-25 11:00:00','2016-11-25 13:00:00');
+INSERT INTO `schedule` VALUES (19,'x22ykbi0mkkj5qqporji8pgyvwjepgqi','2016-11-29 14:00:00','2016-11-29 17:00:00'),(20,'x22ykbi0mkkj5qqporji8pgyvwjepgqi','2016-11-30 14:00:00','2016-11-30 17:00:00'),(21,'x22ykbi0mkkj5qqporji8pgyvwjepgqi','2016-12-01 10:00:00','2016-12-01 12:00:00'),(22,'x22ykbi0mkkj5qqporji8pgyvwjepgqi','2016-12-02 11:00:00','2016-12-02 13:00:00'),(24,'gjjxo2f2p7nu0wn0eqq0h51gfvb9v1i5','2016-11-29 10:00:00','2016-11-29 13:00:00'),(25,'gjjxo2f2p7nu0wn0eqq0h51gfvb9v1i5','2016-11-29 18:00:00','2016-11-29 21:00:00'),(26,'gjjxo2f2p7nu0wn0eqq0h51gfvb9v1i5','2016-11-30 14:00:00','2016-11-30 17:00:00'),(27,'gjjxo2f2p7nu0wn0eqq0h51gfvb9v1i5','2016-12-01 10:00:00','2016-12-01 13:00:00'),(28,'gjjxo2f2p7nu0wn0eqq0h51gfvb9v1i5','2016-12-01 18:00:00','2016-12-01 21:00:00');
 /*!40000 ALTER TABLE `schedule` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -208,7 +208,7 @@ CREATE TABLE `staff` (
   `ROLE` varchar(255) NOT NULL,
   `GENDER` varchar(45) NOT NULL,
   `AGE` int(11) NOT NULL,
-  `TEL` int(11) NOT NULL,
+  `TEL` mediumtext NOT NULL,
   `USERNAME` varchar(45) NOT NULL,
   `PASSWORD` varchar(45) NOT NULL,
   PRIMARY KEY (`ID`)
@@ -221,7 +221,7 @@ CREATE TABLE `staff` (
 
 LOCK TABLES `staff` WRITE;
 /*!40000 ALTER TABLE `staff` DISABLE KEYS */;
-INSERT INTO `staff` VALUES ('ncff72rk0j6o9fso2sc9bmpww4z29nvz','abc','Cook','female',20,987654321,'cook','cook'),('x22ykbi0mkkj5qqporji8pgyvwjepgqi','shawn','Manager','male',21,1234567890,'admin','admin');
+INSERT INTO `staff` VALUES ('gjjxo2f2p7nu0wn0eqq0h51gfvb9v1i5','Kevin Yen','Cook','male',20,'5145813089','k8210985','EeE171717'),('skr7r5q6brooarsf18dytnakq5omtsp6','Dishi Zhu','Cook','female',99,'5147483647','dishi','1234567890'),('x22ykbi0mkkj5qqporji8pgyvwjepgqi','shawn','Manager','male',21,'1234567890','admin','admin');
 /*!40000 ALTER TABLE `staff` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -234,4 +234,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-11-24 16:53:44
+-- Dump completed on 2016-11-28 15:40:56

@@ -28,6 +28,11 @@ $app->post('/add_orderlist', function($request) {
 		return "403: No Permission";
 	}
 	$data = $request->getParsedBody();
+	$mid = $data["MID"];
+	$amount = $data["AMOUNT"];
+	$pop = json_decode($dao->findby('menu','POPULARITY','ID',$mid));
+	$new_pop = (int)$pop[0]->POPULARITY + (int)$amount;
+	$dao->updatePopularity($mid, $new_pop);
 	return $dao->addData($data);
 });
 
@@ -73,6 +78,13 @@ $app->delete('/delete_orderlist/{id}', function($request) {
 	if($exist == "empty"){
 		return "404: Item Not Found";
 	}else {
+		$data = json_decode($exist);
+		$mid = $data[0]->MID;
+		$amount = $data[0]->AMOUNT;
+		$pop = json_decode($dao->findby('menu','POPULARITY','ID',$mid));
+		$new_pop = (int)$pop[0]->POPULARITY - (int)$amount;
+		if($new_pop < 0){$new_pop = 0;}
+		$dao->updatePopularity($mid, $new_pop);
 		return $dao->deleteby($id);
 	}
 });

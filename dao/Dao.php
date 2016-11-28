@@ -83,6 +83,14 @@ class Dao {
 		}
 	}
 
+	public function updatePopularity($mid, $pop) {
+		$db = new DBconnect();
+		$conn = $db->setup();
+		$sql = "update menu set POPULARITY = '$pop' where ID = '$mid'";
+		$result = $conn->query($sql);
+		return $result;
+	}
+
 }
 
 ?>
